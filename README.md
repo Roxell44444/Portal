@@ -1,55 +1,52 @@
 # PORTAL
 
-**PORTAL** is an Android-first, modular social and exploration platform that connects people, real-world places, visual discovery, AI characters, and location-based experiences.
+**PORTAL** is an Android-first social discovery platform connecting people, real-world places, visual discovery, AI characters, and location-based experiences.
 
-> Project status: foundation and architecture phase. Features are not considered complete until implemented and tested.
+> Current phase: first functional foundation. Some product modules are still planned and are not represented as complete.
 
 ## Product modules
 
 - **PORTAL SOCIAL** — profiles, posts, media, reactions, comments, follows, and messaging.
-- **PORTAL MAP** — an interactive world map with public places and opt-in geolocated discoveries.
-- **PORTAL VISION** — camera-assisted place recognition using visual signals, OCR, and location context.
-- **PORTAL AI** — clearly disclosed AI characters that can interact and contribute sourced information.
-- **PORTAL EXPLORATION** — missions, clues, achievements, and community experiences designed around safety.
+- **PORTAL MAP** — worldwide map, place search, optional device location, and saved places.
+- **PORTAL VISION** — camera-assisted place recognition and OCR.
+- **PORTAL AI** — disclosed AI characters with sourced factual information.
+- **PORTAL EXPLORATION** — missions, clues, achievements, and community experiences.
 
 All modules share PORTAL CORE: identity, permissions, privacy, moderation, place records, and application services.
 
-## Initial technology direction
+## Implemented in the first code foundation
 
-- Flutter / Dart for the Android application.
-- Supabase (PostgreSQL, Auth, Storage, Realtime, Edge Functions) for backend services.
-- PostGIS for geographic queries.
-- OpenStreetMap-compatible map data with required attribution and a replaceable tile provider.
-- On-device ML Kit capabilities where supported; recognition providers remain replaceable.
-- GitHub for source control and automated checks.
+- Flutter application structure and Android build workflow.
+- Supabase email registration, login, password reset, and logout integration.
+- Basic user profile.
+- Text post creation and public feed.
+- OpenStreetMap-based world map, Nominatim place search, optional foreground location, external map links, and saved places schema.
+- Initial PostgreSQL schema with Row Level Security policies.
 
-The stack is provisional until a small technical validation confirms current free-tier limits, Android compatibility, and device performance. No paid service is a prerequisite for the first prototype.
+Vision, AI characters, missions, messaging, comments, reactions, and media upload are not implemented yet.
 
-## Repository layout
+## Technology
 
-```text
-docs/                 architecture, roadmap, data and security decisions
-lib/                  Flutter application source (next implementation stage)
-supabase/             SQL migrations and backend functions
-test/                 unit, widget and integration tests
-assets/               app-owned visual assets
-```
+- Flutter / Dart
+- Supabase Auth and PostgreSQL
+- OpenStreetMap map tiles and Nominatim search for the prototype
+- PostGIS-ready geographic architecture
+- GitHub Actions for Android builds
 
-## Development principles
+The public OSM tile and Nominatim services have usage policies and are not unlimited production infrastructure. Before global scale, PORTAL must use a provider with an appropriate quota or self-hosted services, with attribution and caching requirements respected.
 
-1. Build one integrated product, not disconnected demos.
-2. Keep modules separated behind shared domain contracts.
-3. Protect user data with server-side authorization and database RLS.
-4. Never ship service-role keys or private credentials in the mobile app.
-5. Make location sharing explicit, optional, and controllable.
-6. Clearly label AI-generated content; require evidence for factual place claims.
-7. Treat external services as replaceable adapters.
-8. Document and test each milestone before calling it complete.
+## Build
 
-## Getting started
+See [docs/SETUP.md](docs/SETUP.md) for Supabase setup, GitHub Actions secrets, and APK build instructions.
 
-The Flutter application scaffold will be added after the architecture and environment checks. See [Architecture](docs/ARCHITECTURE.md), [Roadmap](docs/ROADMAP.md), [Database plan](docs/DATABASE.md), and [Security](docs/SECURITY.md).
+## Architecture and planning
 
-## License
+- [Architecture](docs/ARCHITECTURE.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Database plan](docs/DATABASE.md)
+- [Security](docs/SECURITY.md)
+- [Setup](docs/SETUP.md)
 
-License to be selected before public distribution.
+## Security principles
+
+Location access is optional and requested only when the user invokes the feature. No background tracking is enabled. Never place Supabase service-role keys in the mobile app.
