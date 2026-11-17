@@ -24,6 +24,8 @@ create table if not exists public.places (
   display_name text not null,
   latitude double precision not null check (latitude between -90 and 90),
   longitude double precision not null check (longitude between -180 and 180),
+  source_url text,
+  source_license text not null default 'ODbL-1.0',
   created_at timestamptz not null default now(),
   unique(provider, provider_place_id)
 );
