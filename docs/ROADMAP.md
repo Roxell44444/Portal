@@ -4,33 +4,36 @@ Milestones are sequential. A milestone is complete only after its acceptance che
 
 ## M0 — Repository and architecture
 - [x] Confirm independent PORTAL repository and default branch.
-- [x] Document product modules and system boundaries.
-- [ ] Add Flutter scaffold and automated formatting/analyzer workflow.
-- [ ] Record verified toolchain and dependency versions.
+- [x] Document product modules, architecture, data model, roadmap, and security baseline.
+- [x] Add Flutter dependencies, source layout, and Android CI build workflow.
+- [ ] Confirm successful CI build on GitHub Actions.
 
-**Acceptance:** repository structure is coherent; architecture and security decisions are documented.
+## M1 — App shell and first vertical slice
+- [x] Dark PORTAL theme and bottom navigation.
+- [x] Login, registration, password reset, and logout integration with Supabase Auth.
+- [x] Basic account profile.
+- [x] Text post composer and public feed integration.
+- [x] Global OSM map, manual place search, optional foreground location, and external map link.
+- [x] Save discovered places to the signed-in user's account.
+- [ ] Test the full flow against a real Supabase project and Android device.
 
-## M1 — App shell and design system
-- [ ] App entry point, theme, responsive layout.
-- [ ] Navigation shell with placeholder routes for the five product modules.
-- [ ] Shared loading, empty, error, and permission states.
-- [ ] Widget tests for navigation and theme.
+## M2 — Complete identity and profiles
+- [ ] Profile editing, username uniqueness flow, avatar upload.
+- [ ] Account privacy controls and account deletion.
+- [ ] Auth email-confirmation and recovery flows verified end to end.
 
-## M2 — Identity and profiles
-- [ ] Authentication adapter and session handling.
-- [ ] Profile creation/editing and account settings.
-- [ ] Database migrations and RLS tests.
-- [ ] Privacy defaults and account deletion plan.
+## M3 — Social network
+- [ ] Photo/video uploads and media processing.
+- [ ] Comments, reactions, follows, and feed ranking.
+- [ ] Direct messaging and notifications.
+- [ ] Reporting, blocking, and moderation workflows.
 
-## M3 — Social foundation
-- [ ] Posts, media metadata, comments, reactions, follows.
-- [ ] Feed pagination and moderation/report flows.
-- [ ] Storage access rules and abuse controls.
-
-## M4 — Map and places
-- [ ] Map provider adapter and attribution.
-- [ ] Place search and canonical place records.
-- [ ] User-confirmed discoveries and privacy-aware geo queries.
+## M4 — Global map and places
+- [ ] Provider abstraction and production geocoder/tile hosting plan.
+- [ ] PostGIS indexes and nearby-place queries.
+- [ ] Place pages, categories, saved lists, and discovery records.
+- [ ] Routing provider and route presentation.
+- [ ] Review ODbL attribution and share-alike obligations.
 
 ## M5 — Vision
 - [ ] Camera permission and capture flow.
@@ -44,18 +47,17 @@ Milestones are sequential. A milestone is complete only after its acceptance che
 
 ## M7 — Exploration
 - [ ] Mission definitions, progress, achievements.
-- [ ] Safe geofencing rules and abuse prevention.
+- [ ] Safe location rules and abuse prevention.
 - [ ] Cross-module discovery-to-mission workflow.
 
-## M8 — Messaging, notifications, and hardening
-- [ ] Conversations and message permissions.
-- [ ] Notifications and user controls.
-- [ ] Security review, performance checks, accessibility.
+## M8 — Hardening
+- [ ] RLS and storage policy tests.
+- [ ] Security, privacy, performance, and accessibility review.
+- [ ] Unit, widget, integration, and backend tests.
 
 ## M9 — Android release candidate
-- [ ] Unit, widget, integration, and backend policy tests.
-- [ ] Build reproducibly in CI.
-- [ ] Verify install and core flows on a real Android device.
-- [ ] Prepare privacy disclosures and release documentation.
+- [ ] Reproducible release build and install test.
+- [ ] Privacy disclosures and release documentation.
+- [ ] Validate all core flows on a real Android device.
 
-No milestone is declared complete based only on code being written.
+A checkmark means code or documentation exists, not that production readiness has been proven. No milestone is declared complete from code generation alone.
