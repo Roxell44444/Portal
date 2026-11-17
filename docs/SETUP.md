@@ -10,7 +10,7 @@
 No uses la clave `service_role` en el cliente ni en la compilación.
 
 ## Mapas globales
-El prototipo utiliza teselas de OpenStreetMap con atribución y Nominatim para buscar lugares. Nominatim público tiene límites y política de uso; no es una API ilimitada para una aplicación mundial con muchos usuarios. Antes de escalar, se deberá usar un proveedor con cuota adecuada o infraestructura propia. No se permite scraping masivo ni usar el servicio público para descargas masivas.
+El prototipo utiliza teselas de OpenStreetMap con atribución visible y caché persistente nativa de flutter_map 8.3.2, y Nominatim para búsquedas manuales iniciadas por el usuario. El cliente serializa las consultas, limita cada dispositivo a una petición por segundo y conserva resultados repetidos en memoria. Esto no controla el límite agregado de todo PORTAL: Nominatim público admite como máximo una petición por segundo por aplicación y solo uso moderado. No es una API ilimitada ni infraestructura de producción global. Antes de abrir el servicio al público, PORTAL deberá cambiar a un proveedor con cuota apropiada o desplegar geocodificación y teselas propias. No se permite autocompletar con Nominatim público, scraping ni descargas masivas. Los lugares conservan identidad OSM estable (tipo e ID), URL de fuente y licencia ODbL.
 
 ## Android
 La compilación genera el proyecto Android con Flutter en GitHub Actions. El permiso de ubicación en primer plano debe estar declarado en AndroidManifest. La ubicación solo se solicita cuando la persona toca el botón correspondiente.
