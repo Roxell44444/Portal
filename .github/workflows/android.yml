@@ -22,7 +22,7 @@ jobs:
           rm -rf build_workspace/lib build_workspace/test
           cp -R lib build_workspace/lib
           if [ -d test ]; then cp -R test build_workspace/test; fi
-          sed -i '/<application/i\    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />\n    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />' build_workspace/android/app/src/main/AndroidManifest.xml
+          sed -i '/<application/i\    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />\n    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />\n    <uses-permission android:name="android.permission.INTERNET" />' build_workspace/android/app/src/main/AndroidManifest.xml
       - name: Resolve packages
         working-directory: build_workspace
         run: flutter pub get
