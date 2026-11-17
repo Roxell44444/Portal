@@ -19,8 +19,10 @@ jobs:
           flutter create --platforms=android --project-name=portal build_workspace
           cp pubspec.yaml build_workspace/pubspec.yaml
           cp analysis_options.yaml build_workspace/analysis_options.yaml
-          rm -rf build_workspace/lib
+          rm -rf build_workspace/lib build_workspace/test
           cp -R lib build_workspace/lib
+          if [ -d test ]; then cp -R test build_workspace/test; fi
+          sed -i '/<application/i\    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />\n    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />' build_workspace/android/app/src/main/AndroidManifest.xml
       - name: Resolve packages
         working-directory: build_workspace
         run: flutter pub get
