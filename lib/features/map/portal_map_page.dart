@@ -79,12 +79,18 @@ class _PortalMapPageState extends State<PortalMapPage> {
   Future<void> savePlace(PlaceResult p) async {
     try {
       final db = Supabase.instance.client;
-      final saved = await db.from('places').upsert({
+      final existing = await db.from('places').select('id')
+        .eq('provider', 'openstreetmap').eq('provider_place_id', p.id).maybeSingle();
+      final place = existing ?? await db.from('places').insert({
         'provider': 'openstreetmap', 'provider_place_id': p.id, 'name': p.name,
         'display_name': p.label, 'latitude': p.lat, 'longitude': p.lon,
-      }, onConflict: 'provider,provider_place_id').select('id').single();
-      await db.from('saved_places').upsert({'user_id': db.auth.currentUser!.id, 'place_id': saved['id']},
-        onConflict: 'user_id,place_id');
+      }).select('id').single();
+      final userId = db.auth.currentUser!.id;
+      final alreadySaved = await db.from('saved_places').select('place_id')
+        .eq('user_id', userId).eq('place_id', place['id']).maybeSingle();
+      if (alreadySaved == null) {
+        await db.from('saved_places').insert({'user_id': userId, 'place_id': place['id']});
+      }
       if (mounted) { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Lugar guardado en tu cuenta.'))); }
     } catch (_) {
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No se pudo guardar. Revisa la configuración de la base de datos.')));
