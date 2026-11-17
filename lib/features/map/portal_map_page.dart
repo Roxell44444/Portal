@@ -83,7 +83,8 @@ class _PortalMapPageState extends State<PortalMapPage> {
         .eq('provider', 'openstreetmap').eq('provider_place_id', p.id).maybeSingle();
       final place = existing ?? await db.from('places').insert({
         'provider': 'openstreetmap', 'provider_place_id': p.id, 'name': p.name,
-        'display_name': p.label, 'latitude': p.lat, 'longitude': p.lon,\n        'source_url': p.sourceUrl, 'source_license': 'ODbL-1.0',
+        'display_name': p.label, 'latitude': p.lat, 'longitude': p.lon,
+        'source_url': p.sourceUrl, 'source_license': 'ODbL-1.0',
       }).select('id').single();
       final userId = db.auth.currentUser!.id;
       final alreadySaved = await db.from('saved_places').select('place_id')
