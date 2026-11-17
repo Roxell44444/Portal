@@ -128,7 +128,7 @@ class _PortalMapPageState extends State<PortalMapPage> {
       Expanded(child: FlutterMap(mapController: map, options: MapOptions(initialCenter: center, initialZoom: 2,
         onTap: (_, point) => setState(() { center = point; markers = [Marker(point: point, width: 40, height: 40, child: const Icon(Icons.place, color: Colors.orangeAccent, size: 38))]; })),
         children: [
-          TileLayer(urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', userAgentPackageName: 'app.portal.mobile'),
+          TileLayer(urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', userAgentPackageName: 'com.example.portal'),
           MarkerLayer(markers: markers),
           RichAttributionWidget(attributions: [TextSourceAttribution('© OpenStreetMap contributors',
             onTap: () => launchUrl(Uri.parse('https://www.openstreetmap.org/copyright')))]),
