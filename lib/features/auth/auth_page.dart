@@ -22,8 +22,11 @@ class _AuthPageState extends State<AuthPage> {
     try {
       final auth = Supabase.instance.client.auth;
       if (register) {
-        await auth.signUp(email: email.text.trim(), password: password.text,
+        final response = await auth.signUp(email: email.text.trim(), password: password.text,
           data: {'display_name': displayName.text.trim()});
+        if (mounted && response.session == null) {
+          setState(() => error = 'Cuenta creada. Revisa tu correo para confirmar el registro antes de iniciar sesión.');
+        }
       } else {
         await auth.signInWithPassword(email: email.text.trim(), password: password.text);
       }
